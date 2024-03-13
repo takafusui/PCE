@@ -28,6 +28,7 @@ phi, coeffs = cp.expansion.stieltjes(
     poly_order, dist, normed=True, graded=True, reverse=True, retall=True,
     cross_truncation=1.0)
 
+# import ipdb; ipdb.set_trace()
 # --------------------------------------------------------------------------- #
 # Sparse PCE
 # --------------------------------------------------------------------------- #
@@ -58,6 +59,7 @@ fourier_coeffs_sparse = np.linalg.inv(Pinfo_sparse.T @ Pinfo_sparse) \
 # Sparse PCE based surrogate model
 M_sparse = cp.sum(phi_active * fourier_coeffs_sparse, -1)
 
+# import ipdb; ipdb.set_trace()
 # --------------------------------------------------------------------------- #
 # Compute the leave-one-out error (errLOO)
 # errLOO <= 10^{-2}
@@ -131,7 +133,7 @@ print(r'Second-order Sobol indices')
 print(r'-' * length_)
 print(Sens_m2_hat)
 
-# import ipdb; ipdb.set_trace()
+import ipdb; ipdb.set_trace()
 # --------------------------------------------------------------------------- #
 print(r'-' * length_)
 print(r'Plot Univariate effects')
@@ -153,6 +155,7 @@ for idx in range(N_param):
         evals = np.zeros_like(M1_linspace)
     M1[idx, :] = fourier_coeffs_hat[0] + np.sum(evals, axis=0)
 
+
 # Plot with matplotlib
 import matplotlib.pyplot as plt
 idx = 0
@@ -166,3 +169,4 @@ plt.xlabel(r'$\theta_i$')
 plt.ylabel(r'$M^1_i$')
 plt.legend(loc='lower left')
 plt.show()
+plt.close()
